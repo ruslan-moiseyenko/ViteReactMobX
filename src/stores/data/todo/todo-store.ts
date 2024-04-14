@@ -6,53 +6,17 @@ import {
   reaction,
   when
 } from "mobx";
+import { RootStore } from "../../root-store";
+import { Todo } from "./todo";
 
-let initialId = 0;
-
-class Todo {
-  @observable
-  id: number = initialId++;
-
-  @observable
-  name: string = "";
-
-  @observable
-  isCompleted: boolean = false;
-
-  private disposer: () => void;
-
-  constructor(name: string) {
-    this.name = name;
-    makeObservable(this);
-
-    this.disposer = reaction(
-      () => this.isCompleted,
-      () => {
-        console.log(`Todo ${this.id} is currently ${this.isCompleted}`);
-      }
-    );
-  }
-
-  @action
-  setName(name: string) {
-    this.name = name;
-  }
-
-  @action
-  toggleCompleted() {
-    this.isCompleted = !this.isCompleted;
-  }
-
-  dispose() {
-    this.disposer();
-  }
-}
-
-class TodoList {
+export class TodoStore {
   @observable
   todos: Todo[] = [];
 
-  constructor() {
+  private rootStore: RootStore;
+
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore;
     makeObservable(this);
     reaction(
       () => this.todos.length,
@@ -73,8 +37,8 @@ class TodoList {
   }
 
   @action
-  addTodo(name: string) {
-    this.todos.push(new Todo(name));
+  addTodo(name: string, userId: number) {
+    this.todos.push(new Todo(name, userId, this));
   }
 
   @action
@@ -87,6 +51,11 @@ class TodoList {
     }
   }
 
+  // @action
+  getUserTodos(userId: number) {
+    return this.todos.filter((todo) => todo.userId === userId);
+  }
+
   @computed
   get completed() {
     return this.todos.filter((todo) => todo.isCompleted);
@@ -97,5 +66,3 @@ class TodoList {
     return this.todos.filter((todo) => !todo.isCompleted);
   }
 }
-
-export { Todo, TodoList };

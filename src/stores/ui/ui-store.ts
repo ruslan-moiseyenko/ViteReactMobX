@@ -1,5 +1,5 @@
 import { RootStore } from "../root-store";
-import { GlobalView } from "./gloval-view";
+import { GlobalView } from "./global-view";
 
 export class UiStore {
   globalView: GlobalView;

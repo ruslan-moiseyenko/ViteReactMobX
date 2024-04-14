@@ -1,13 +1,13 @@
 import { RootStore } from "../root-store";
-import { UiStore } from "../ui/ui-store";
-import { TodoStore } from "./todo-store";
+import { TodoStore } from "./todo/todo-store";
+import { UserStore } from "./users/user-store";
 
 export class DataStore {
   todoStore: TodoStore;
-  uiStore: UiStore;
+  usersStore: UserStore;
 
   constructor(rootStore: RootStore) {
     this.todoStore = new TodoStore(rootStore);
-    this.uiStore = new UiStore(rootStore);
+    this.usersStore = new UserStore(rootStore);
   }
 }
