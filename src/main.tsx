@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { RootStore } from "./stores/root-store.ts";
+import { createStore } from "./stores/helpers/create-store.ts";
+import { StoreProvider } from "./stores/helpers/store-context.ts";
 
-const rootStore = new RootStore();
-console.log("🚀 ~ rootStore:", rootStore);
+const rootStore = createStore();
 
 // Add some users to the store
 rootStore.dataStore.usersStore.addUser("Kevin Doe");
@@ -25,6 +25,8 @@ rootStore.dataStore.usersStore.removeUser("Kevin Doe");
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <StoreProvider value={rootStore}>
+      <App />
+    </StoreProvider>
   </React.StrictMode>
 );
