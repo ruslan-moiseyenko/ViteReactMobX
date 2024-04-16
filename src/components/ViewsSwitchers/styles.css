@@ -1,0 +1,24 @@
+.nav {
+  display: flex;
+  flex-direction: "row";
+  justify-content: center;
+  background-color: darkblue;
+}
+
+.nav-link {
+  color: aquamarine;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    color: purple;
+  }
+}
+
+.active-tab {
+  color: darkorange;
+}
+
+.button {
+  flex-grow: 1;
+}

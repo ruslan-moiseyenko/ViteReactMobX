@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import { RootStore } from "../../root-store";
 import { User } from "./user";
 
@@ -10,6 +10,7 @@ export class UserStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
+    makeObservable(this);
   }
 
   getUser(name: string) {

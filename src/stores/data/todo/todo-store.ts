@@ -1,11 +1,4 @@
-import {
-  action,
-  computed,
-  makeObservable,
-  observable,
-  reaction,
-  when
-} from "mobx";
+import { action, computed, makeObservable, observable, when } from "mobx";
 import { RootStore } from "../../root-store";
 import { Todo } from "./todo";
 
@@ -17,15 +10,8 @@ export class TodoStore {
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
+
     makeObservable(this);
-    reaction(
-      () => this.todos.length,
-      () => {
-        console.log(
-          `Totally:${this.todos.length}, completed: ${this.completed.length}, incomplete: ${this.incomplete.length}`
-        );
-      }
-    );
 
     when(
       () =>

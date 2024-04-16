@@ -1,17 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import { TodoComponent } from "./components/Todo/Todo";
-import { useStore } from "./stores/helpers/useStore";
+import { ViewsSwitcher } from "./components/ViewsSwitchers";
+import { TodoList } from "./components/Todo/TodoList";
 
 function App() {
   const [count, setCount] = useState(0);
-  const {
-    dataStore: { todoStore }
-  } = useStore();
 
   return (
     <>
-      <TodoComponent />
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
@@ -24,10 +20,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <ViewsSwitcher />
       <div>
-        {todoStore.todos.map((todo) => (
-          <div key={`${Date()}${todo.id}`}> {todo.name}</div>
-        ))}
+        <TodoList />
       </div>
     </>
   );

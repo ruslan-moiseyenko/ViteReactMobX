@@ -15,11 +15,12 @@ export class User {
     this.name = name;
     this.rootStore = rootStore;
 
+    makeObservable(this);
+
     rootStore.dataStore.todoStore.addTodo(
       "That is your first task: delete that task",
       this.id
     );
-    makeObservable(this);
   }
 
   @computed

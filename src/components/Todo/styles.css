@@ -1,0 +1,14 @@
+.todo-wrapper {
+  padding: 5px;
+  margin: 5px;
+  border: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: rgb(171, 206, 206);
+  background-color: darkblue;
+}
+
+.done {
+  background-color: rgb(54, 149, 54);
+  text-decoration: line-through;
+}
